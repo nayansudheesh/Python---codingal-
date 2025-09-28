@@ -1,24 +1,71 @@
 from tkinter import *
-
+import math 
 screen = Tk()
 screen.title("intrest calculator")
-screen.geometry("800x800")
-
-principal_lbl = Label(text="enter your principal")
-
-principal_entry = Entry()
-rate_lbl = Label(text="enter your rate of intrest")
-rate_entry = Entry()
-time_lbl = Label(text="enter your the time you will pay intrest over")
-time_entry = Entry()
+screen.geometry("400x400")
 
 def simple_intrest():
-    rate = rate_entry.get()
-    time = time_entry.get()
-    principal = principal_entry.get()
-    simple_intrest = (principal*rate*time)/100
-    global intrest_lbl
-    intrest_lbl = Label(text=f"simple intrest is {simple_intrest}")
+    top = Toplevel()
+    top.geometry("200x200")
+    top.title("simple intrest calculator")
+    principal_lbl = Label(top, text="enter your principal")
+    principal_entry = Entry(top)
+    rate_lbl = Label(top, text="enter your rate of intrest")
+    rate_entry = Entry(top)
+    time_lbl = Label(top, text="enter your the time  intrest will be payed over")
+    time_entry = Entry(top)
+    intrest_lbl = Label(top, text="")
+    def simple_intrest_calculator():
+        rate = float(rate_entry.get())
+        time = float(time_entry.get())
+        principal = float(principal_entry.get())
+        simple_intrest = (principal*rate*time)/100
+        intrest_lbl.config(text=f"simple intrest is {simple_intrest}")
+    btn_calculate = Button(top, text="click to calculate", bg="white" , fg="black", command=simple_intrest_calculator)
+    principal_lbl.pack()
+    principal_entry.pack()
+    rate_lbl.pack()
+    rate_entry.pack()
+    time_lbl.pack()
+    time_entry.pack()
+    intrest_lbl.pack()
+    btn_calculate.pack()
 
 def compound_intrest():
-    
+    top2 = Toplevel()
+    top2.geometry("200x200")
+    top2.title("compound intrest calculator")
+    principal_lbl = Label(top2, text="enter your principal")
+    principal_entry = Entry(top2)
+    rate_lbl = Label(top2, text="enter your rate of intrest")
+    rate_entry = Entry(top2)
+    time_lbl = Label(top2, text="enter the total time span")
+    time_entry = Entry(top2)
+    lbl_c = Label(top2, text="enter the number of times intrest got compounded annualy")
+    entry_c = Entry(top2)
+    compound_intrest_lbl = Label(top2, text="")
+    def compound_intrest_calculator():
+        principal = float(principal_entry.get())
+        rate = float(rate_entry.get())
+        time = float(time_entry.get())
+        c = float(entry_c.get())
+        compound_intrest1 = principal*(1 + (rate/100*c))**(c*time)
+        compound_intrest_lbl.config(text=f"the compound intrest is {compound_intrest1}")
+    btn_calculate = Button(top2, text="press to calculate compound intrest",command=compound_intrest_calculator)
+    principal_lbl.pack()
+    principal_entry.pack()
+    rate_lbl.pack()
+    rate_entry.pack()
+    time_lbl.pack()
+    time_entry.pack()
+    lbl_c.pack()
+    entry_c.pack()
+    btn_calculate.pack()
+    compound_intrest_lbl.pack()
+btn1 = Button(screen, text="click to calculate simple intrest ", bg="black", fg="white", command=simple_intrest)
+
+btn2 = Button(screen, text="click to calculate compound intrest ", bg="black", fg="white", command=compound_intrest)
+btn1.pack()
+btn2.pack()
+#btn2 for compound intrest to be added later
+screen.mainloop()
